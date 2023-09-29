@@ -10,13 +10,13 @@ const Menu = forwardRef((props, ref) =>{
 
       <ul>
         <li>
-          <NavLink to='/table' className={({ isActive }) => (isActive ? 'isActive': '')}>
-            Table
+          <NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'isActive': '')}>
+            대시보드
           </NavLink>
         </li>
         <li>
-          <NavLink to='/input ' className={({ isActive }) => (isActive ? 'isActive': '')}>
-            Input
+          <NavLink to='/notice ' className={({ isActive }) => (isActive ? 'isActive': '')}>
+            공지사항
           </NavLink>
         </li>
       </ul>   
