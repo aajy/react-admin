@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 function Input() {
   const navigate = useNavigate();
+  const [IsCheck, setIsCheck] = useState(false)
   
   const handleSubmit = (e) => {
 		e.preventDefault();
@@ -23,6 +24,9 @@ function Input() {
   const resetForm = () => {
 		setVal(initVal);
 	};
+  const handleClickRadioButton = (e) =>{
+    setIsCheck(e.target.value)
+  }
 
   return (
     <>
@@ -32,6 +36,17 @@ function Input() {
           <legend className='h'>공지사항</legend>
           <table border='1'>
             <tbody>
+              {/* isCheck */}
+              {/* <tr>
+                <label>
+                  <input type="radio" value ="false" checked ={IsCheck === false} onChange={(e) =>handleClickRadioButton(e)} />
+                  보통
+                </label>
+                <label>
+                  <input type="radio" value ="true" checked ={IsCheck === true} onChange={(e) =>handleClickRadioButton(e)} />
+                  중요
+                </label>
+              </tr> */}
               {/* title */}
               <tr>
                 <th scope='row'>

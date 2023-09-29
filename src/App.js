@@ -21,6 +21,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/notice' element={<Notice />}/>
         <Route path='/notice/insert' element={<Input />}/>
+        <Route path='/notice/modify' element={<Input />}/>
       </Routes>
       {/* <Footer /> */}
     </>
