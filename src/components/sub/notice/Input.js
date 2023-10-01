@@ -1,33 +1,89 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 
 function Input() {
   const navigate = useNavigate();
-  const [IsCheck, setIsCheck] = useState(false)
-  
-  const handleSubmit = (e) => {
-		e.preventDefault();
-	};
-
-  const initVal = {
-    title:'',
-    text:'',
-  }
-  const [Val, setVal] = useState(initVal);
+  const stateList = useLocation().state;
+  const [IsGoBack, setIsGoBack] = useState(false)
+  const [IsModify, setIsModify] = useState(false)
+  let initVal = useRef({
+    title:"",
+    text:"",
+    condition:"normal"
+  });
+  const pageCondition = useLocation().pathname.split('/')[2];
+  const [Val, setVal] = useState(initVal.current);
+  const [ListCondition, setListCondition] = useState("normal")
   // useRef 를 써서 데이터가 변경될 때 마다 실시간 감지를 할 수있음. useState는 재랜더링 시에 감지.
-  
+  useEffect(()=>{
+    if(stateList) {
+      setVal(stateList);
+      initVal.current = stateList;
+      setListCondition(stateList?.condition)
+    } else {
+      return
+    }
+  },[stateList])
+
   const handleChange = (e) => {
 		const { name, value } = e.target;
 		setVal({ ...Val, [name]: value });
+    setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
 	};
+  
+  const handleClickRadioButton =(e)=>{
+    setListCondition(e.target.value);
+    setVal({ ...Val, "condition": e.target.value })
+    setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
+  }
 
   const resetForm = () => {
 		setVal(initVal);
 	};
-  const handleClickRadioButton = (e) =>{
-    setIsCheck(e.target.value)
-  }
 
+  const handleSubmit = (e) => {
+		e.preventDefault();
+    //뒤로가기도 handleSubmit이 먹힘.
+    //이걸 방지하고, 수정된 내용이 없을 때 이전버튼 눌렀을때 뒤로가기.
+    setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
+    if(!IsGoBack) {
+      if(pageCondition === "insert") {
+        console.log('등록요청');
+        fetch('http://localhost:3001/info', {
+          method: 'POST',
+          headers : {
+            'Content-Type':'application/json',
+          },
+          body : JSON.stringify({...Val}),
+        })
+        .then(res => {
+          if (res.ok) {
+            if(!alert("등록되었습니다.")) navigate(-1);
+          }
+        }).catch((error)=>{
+          console.log(error);
+        }
+        )
+      } else {
+        console.log("수정요청");
+        fetch(`http://localhost:3001/info/${Val.id}`, {
+          method: 'PUT',
+          headers : {
+            'Content-Type':'application/json',
+          },
+          body : JSON.stringify({...Val}),
+        })
+        .then(res => {
+          if (res.ok) {
+            if(!alert("수정되었습니다.")) navigate(-1); //alert창 확인 누르면 뒤로가기.
+          }
+        })
+      }
+    } else {
+      console.log('그냥 뒤로가기');
+      return;
+    }
+	};
   return (
     <>
       {/* 제목 내용 전송 폼 */}
@@ -36,17 +92,32 @@ function Input() {
           <legend className='h'>공지사항</legend>
           <table border='1'>
             <tbody>
-              {/* isCheck */}
-              {/* <tr>
-                <label>
-                  <input type="radio" value ="false" checked ={IsCheck === false} onChange={(e) =>handleClickRadioButton(e)} />
-                  보통
-                </label>
-                <label>
-                  <input type="radio" value ="true" checked ={IsCheck === true} onChange={(e) =>handleClickRadioButton(e)} />
-                  중요
-                </label>
-              </tr> */}
+              {/* 일반/중요 공지사항 선택 */}
+              <tr>
+                <th scope='row'>
+                  <label htmlFor='title'>종류</label>
+                </th>
+                <td>
+                  <label>
+                    <input
+                      type="radio"
+                      value="normal"
+                      checked={ListCondition === "normal"}
+                      onChange={handleClickRadioButton}
+                    />
+                    일반
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="import"
+                      checked={ListCondition === "import"}
+                      onChange={handleClickRadioButton}
+                    />
+                    중요
+                  </label>
+                </td>
+              </tr>
               {/* title */}
               <tr>
                 <th scope='row'>
@@ -57,8 +128,9 @@ function Input() {
                     type='text'
                     name='title'
                     placeholder='제목을 입력하세요.'
-                    value={Val.title}
+                    value={Val?.title}
                     onChange={handleChange}
+                    required
                   />
                 </td>
               </tr>
@@ -74,7 +146,7 @@ function Input() {
                     placeholder='내용을 입력하세요.'
                     cols='30'
                     rows='10'
-                    value={Val.text}
+                    value={Val?.text}
                     onChange={handleChange}
                     required
                     wrap
@@ -88,9 +160,12 @@ function Input() {
               {/* btnSet */}
               <tr>
                 <th colSpan='3'>
-                  <button onClick={() => navigate(-1)}>이전페이지 가기</button>
+                  <button onClick={()=>{
+                    navigate(-1);
+                    setIsGoBack(true)
+                    }}>이전페이지 가기</button>
                   <input type='reset' value='초기화' onClick={resetForm} />
-                  <input type='submit' value='전송' />
+                  <input type='submit' disabled={pageCondition !== 'insert' && IsModify} value={pageCondition === 'insert'? "등록":"수정"} />
                 </th>
               </tr>
             </tbody>

@@ -7,11 +7,11 @@
 	z-index: 5;
 	background: rgba(0, 0, 0, 0.9);
 	padding: 5vw;
-  .con {
+	.con {
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-    color: #fefefe;
+		color: #fefefe;
 	}
 
 	.close {
@@ -21,5 +21,8 @@
 		font: bold 14px/1 'arial';
 		color: orange;
 		cursor: pointer;
+	}
+	.close.true {
+		top: 100px;
 	}
 }
