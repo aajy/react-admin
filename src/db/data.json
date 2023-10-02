@@ -1,52 +1,52 @@
 {
   "info": [
     {
-      "id": 3,
-      "title": "중요한 제목333",
-      "text": "중요한 내용333",
+      "id": 1,
+      "title": "중요1",
+      "text": "중요1",
       "condition": "import"
     },
     {
-      "id": 4,
-      "title": "1223445",
-      "text": "12344266",
+      "id": 2,
+      "title": "중요2",
+      "text": "중요2",
       "condition": "import"
     },
     {
-      "title": "1",
-      "text": "1",
+      "title": "일반1",
+      "text": "일반1",
+      "condition": "normal",
+      "id": 3
+    },
+    {
+      "title": "일반2",
+      "text": "일반2",
+      "condition": "normal",
+      "id": 4
+    },
+    {
+      "title": "일반3",
+      "text": "일반3",
       "condition": "normal",
       "id": 5
     },
     {
-      "title": "등록",
-      "text": "등록",
-      "condition": "normal",
+      "title": "중요3",
+      "text": "중요3",
+      "condition": "import",
       "id": 6
     },
     {
-      "title": "test",
-      "text": "test",
+      "title": "일반4",
+      "text": "일반4",
       "condition": "normal",
       "id": 7
     },
     {
-      "title": "１１",
-      "text": "２２",
+      "title": "중요4",
+      "text": "중요4",
       "condition": "import",
-      "id": 9
-    },
-    {
-      "title": "일반공지사항",
-      "text": "내용",
-      "condition": "normal",
-      "id": 10
-    },
-    {
-      "title": "중요공지사항",
-      "text": "내용",
-      "condition": "import",
-      "id": 11
+      "id": 8
     }
   ]
 }

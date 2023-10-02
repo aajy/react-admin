@@ -18,9 +18,14 @@ function Notice() {
         return res.json();
       })
       .then((data) => {
-        setInfoList(data);
+        setInfoList(
+          ListCondition === "import"
+            ? data.filter((info) => info.condition === "import")
+            : data
+        );
       });
-  }, []);
+    setPage(1);
+  }, [ListCondition]);
 
   useEffect(() => {
     setCurrentPosts(InfoList.slice(indexOfFirstPost, indexOfLastPost));
@@ -60,7 +65,7 @@ function Notice() {
         </label>
       </div>
       {currentPosts && InfoList.length ? (
-        <Table listCondition={ListCondition} list={currentPosts} />
+        <Table list={currentPosts} />
       ) : (
         <div> No posts.</div>
       )}
