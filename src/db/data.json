@@ -41,12 +41,6 @@
       "text": "일반4",
       "condition": "normal",
       "id": 7
-    },
-    {
-      "title": "중요4",
-      "text": "중요4",
-      "condition": "import",
-      "id": 8
     }
   ]
 }

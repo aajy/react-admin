@@ -12,6 +12,7 @@ function Info({info}) {
     .then(res => {
       if (res.ok) {
         alert("삭제되었습니다.");
+        navigate(0); //새로고침
       }
     })
   }
