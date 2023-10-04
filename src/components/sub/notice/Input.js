@@ -43,8 +43,6 @@ function Input() {
 
   const handleSubmit = (e) => {
 		e.preventDefault();
-    //뒤로가기도 handleSubmit이 먹힘.
-    //이걸 방지하고, 수정된 내용이 없을 때 이전버튼 눌렀을때 뒤로가기.
     setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
     if(!IsGoBack) {
       if(pageCondition === "insert") {
@@ -148,8 +146,8 @@ function Input() {
                     rows='10'
                     value={Val?.text}
                     onChange={handleChange}
+                    wrap = "true"
                     required
-                    wrap
                   />
                   {/* 
                   required : 폼 데이터(form data)가 서버로 제출되기 전 텍스트 입력 영역이 반드시 채워져 있어야 함을 명시함.
@@ -160,7 +158,7 @@ function Input() {
               {/* btnSet */}
               <tr>
                 <th colSpan='3'>
-                  <button onClick={()=>{
+                  <button type="button" onClick={()=>{
                     navigate(-1);
                     setIsGoBack(true)
                     }}>이전페이지 가기</button>

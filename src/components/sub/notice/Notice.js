@@ -29,7 +29,7 @@ function Notice() {
 
   useEffect(() => {
     setCurrentPosts(InfoList.slice(indexOfFirstPost, indexOfLastPost));
-  }, [InfoList, Page]);
+  }, [InfoList, indexOfFirstPost, indexOfLastPost]);
 
   const setCurrentPage = (page) => {
     setPage(page);
