@@ -4,11 +4,12 @@ import { Link, NavLink } from 'react-router-dom'
 const Menu = forwardRef((props, ref) =>{
   return (
     <div id="gnb">
-      <h1>
-        <Link to='/'>LOGO</Link>
-      </h1>
-
       <ul>
+        <li>
+          <Link to='/'>
+            홈
+          </Link>
+        </li>
         <li>
           <NavLink to='/dashboard' className={({ isActive }) => (isActive ? 'isActive': '')}>
             대시보드

@@ -1,6 +1,16 @@
 .upload {
-  border: 2px solid #222;
+  padding: 20px 0;
+  >p {
+    font-weight: bold;
+  }
+  >span {
+    display: block;
+    font-size: 12px;
+    color:#b45757;
+  }
 }
 .download {
-  border: 2px solid #ff6f6a;
+  >p {
+    font-weight: bold;
+  }
 }

@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import * as XLSX from 'xlsx';
 
 function Dashboard() {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null); //특정 DOM에 접근하여 DOM조작을 가능하게 하는 훅.
   const [uploadedFile, setUploadedFile] = useState(null);
   const [InputMessage, setInputMessage] = useState('파일을 업로드하세요.');
 
@@ -50,7 +50,7 @@ function Dashboard() {
     }
   }
   const excelDownload = (uploadedFile) => {
-    const excelFileName = `${uploadedFile.file.name}다운로드.xlsx`;
+    const excelFileName = `${uploadedFile.file.name}다운로드할 이름.xlsx`;
   
     const ws = XLSX.utils.json_to_sheet(uploadedFile.jsonData); 
     const wb = XLSX.utils.book_new();
@@ -60,29 +60,29 @@ function Dashboard() {
   };
 
   return (
-    <div>
+    <div className='page'>
       대시보드 페이지 입니다.
       <div className='upload'>
-        <h2>Excel 파일 업로드</h2>
+        <p>Excel 파일 업로드</p>
         <input
           ref={inputRef}
           type="file"
           accept=".xlsx, .xls, .csv"
           onChange={(e) => handleDrop(e.target.files)}
         />
-        <p>{InputMessage}</p>
+        <span>{InputMessage}</span>
         <div>
           {uploadedFile &&( 
             <div>
               <p>{uploadedFile?.file.name}</p>
               <button onClick={() => clear()}>삭제</button>
-              <button onClick={clear}>이름변경</button>
+              {/*<button onClick={clear}>이름변경</button>*/}
             </div>)
           }
         </div>
       </div>
       <div className='download'>
-        <h2>Excel 파일 다운로드</h2>
+        <p>Excel 파일 다운로드</p>
         <button onClick={()=>excelDownload(uploadedFile)}>파일 다운로드</button>
       </div>
     </div>

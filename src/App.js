@@ -13,18 +13,20 @@ import Input from './components/sub/notice/Input';
 
 function App() {
   return (
-    <>
-      <Header />
-			<Menu/>
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/notice' element={<Notice />}/>
-        <Route path='/notice/insert' element={<Input />}/>
-        <Route path='/notice/modify' element={<Input />}/>
-      </Routes>
+    <div className='wrap'>
+      {/*<Header />*/}
+      <div className='layout'>
+        <Menu/>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/dashboard' element={<Dashboard />}/>
+          <Route path='/notice' element={<Notice />}/>
+          <Route path='/notice/insert' element={<Input />}/>
+          <Route path='/notice/modify' element={<Input />}/>
+        </Routes>
+      </div>
       {/* <Footer /> */}
-    </>
+    </div>
   );
 }
 

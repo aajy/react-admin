@@ -4,7 +4,7 @@
       "id": 1,
       "title": "중요1",
       "text": "중요1",
-      "condition": "import"
+      "condition": "normal"
     },
     {
       "id": 2,
@@ -41,6 +41,78 @@
       "text": "일반4",
       "condition": "normal",
       "id": 7
+    },
+    {
+      "id": 8,
+      "title": "중요4",
+      "text": "중요4",
+      "condition": "import"
+    },
+    {
+      "id": 9,
+      "title": "중요5",
+      "text": "중요5",
+      "condition": "import"
+    },
+    {
+      "title": "일반5",
+      "text": "일반5",
+      "condition": "normal",
+      "id": 10
+    },
+    {
+      "title": "일반6",
+      "text": "일반6",
+      "condition": "normal",
+      "id": 11
+    },
+    {
+      "title": "일반7",
+      "text": "일반7",
+      "condition": "normal",
+      "id": 12
+    },
+    {
+      "title": "중요6",
+      "text": "중요6",
+      "condition": "import",
+      "id": 13
+    },
+    {
+      "title": "일반8",
+      "text": "일반8",
+      "condition": "normal",
+      "id": 14
+    },
+    {
+      "id": 15,
+      "title": "중요7",
+      "text": "중요7",
+      "condition": "import"
+    },
+    {
+      "id": 16,
+      "title": "중요8",
+      "text": "중요8",
+      "condition": "import"
+    },
+    {
+      "title": "일반9",
+      "text": "일반9",
+      "condition": "normal",
+      "id": 17
+    },
+    {
+      "title": "일반10",
+      "text": "일반10",
+      "condition": "normal",
+      "id": 18
+    },
+    {
+      "title": "일반11",
+      "text": "일반11",
+      "condition": "normal",
+      "id": 19
     }
   ]
 }

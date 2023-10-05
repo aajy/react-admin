@@ -8,7 +8,7 @@ function Notice() {
   const [ListCondition, setListCondition] = useState("all");
   const [InfoList, setInfoList] = useState([]);
   const [Page, setPage] = useState(1);
-  const postPerPage = 1; // 페이지 당 게시글 개수
+  const postPerPage = 3; // 페이지 당 게시글 개수
   const indexOfLastPost = Page * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const [currentPosts, setCurrentPosts] = useState(0);
@@ -42,9 +42,9 @@ function Notice() {
     navigate("/notice/insert");
   };
   return (
-    <>
-      <button onClick={navigateToInsert}>등록</button>
-      <div>
+    <div className='page'>
+      <button onClick={navigateToInsert} className=''>등록</button>
+      <div className='condition'>
         <label>
           <input
             type="radio"
@@ -76,7 +76,7 @@ function Notice() {
         postPerPage={postPerPage}
         setPage={setCurrentPage}
       />
-    </>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 function Main() {
   return (
-    <div>
+    <div className='page'>
       메인화면
     </div>
   )

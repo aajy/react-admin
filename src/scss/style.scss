@@ -8,9 +8,13 @@ body {
 }
 @import "common/header";
 @import "common/footer";
+@import "common/layout";
 @import "common/reset";
 @import "common/menu";
 @import "common/modal";
 @import "common/paging";
 
+@import "main/main";
+
 @import "sub/dashboard";
+@import "sub/notice";

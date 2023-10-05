@@ -6,7 +6,7 @@ function Input() {
   const stateList = useLocation().state;
   const [IsGoBack, setIsGoBack] = useState(false)
   const [IsModify, setIsModify] = useState(false)
-  let initVal = useRef({
+  let initVal = useRef({ // useRef 를 써서 데이터가 변경될 때 마다 실시간 감지를 할 수있음. useState는 재랜더링 시에 감지.
     title:"",
     text:"",
     condition:"normal"
@@ -14,7 +14,7 @@ function Input() {
   const pageCondition = useLocation().pathname.split('/')[2];
   const [Val, setVal] = useState(initVal.current);
   const [ListCondition, setListCondition] = useState("normal")
-  // useRef 를 써서 데이터가 변경될 때 마다 실시간 감지를 할 수있음. useState는 재랜더링 시에 감지.
+  
   useEffect(()=>{
     if(stateList) {
       setVal(stateList);
@@ -38,7 +38,7 @@ function Input() {
   }
 
   const resetForm = () => {
-		setVal(initVal);
+		setVal({ ...initVal });
 	};
 
   const handleSubmit = (e) => {
@@ -83,7 +83,7 @@ function Input() {
     }
 	};
   return (
-    <>
+    <div className='page'>
       {/* 제목 내용 전송 폼 */}
       <form onSubmit={handleSubmit}>
         <fieldset>
@@ -162,15 +162,16 @@ function Input() {
                     navigate(-1);
                     setIsGoBack(true)
                     }}>이전페이지 가기</button>
-                  <input type='reset' value='초기화' onClick={resetForm} />
-                  <input type='submit' disabled={pageCondition !== 'insert' && IsModify} value={pageCondition === 'insert'? "등록":"수정"} />
+                   {/*<input type='reset' value='초기화' onClick={resetForm} />
+                 <input type='submit' disabled={pageCondition !== 'insert' && IsModify} value={pageCondition === 'insert'? "등록":"수정"} />*/}
+                  <input type='submit' value={pageCondition === 'insert'? "등록":"수정"} />
                 </th>
               </tr>
             </tbody>
           </table>
         </fieldset>
       </form>
-    </>
+    </div>
   )
 }
 

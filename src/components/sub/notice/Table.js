@@ -1,9 +1,8 @@
-import Info from "./Info";
+import Info from './Info';
 
 function Table({ list }) {
   return (
     <div>
-      공지사항 테이블
       <table border="1">
         <tbody>
           {/* 제목 내용 반복문 */}
