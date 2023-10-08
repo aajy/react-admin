@@ -5,7 +5,7 @@ function Input() {
   const navigate = useNavigate();
   const stateList = useLocation().state;
   const [IsGoBack, setIsGoBack] = useState(false)
-  const [IsModify, setIsModify] = useState(false)
+  const IsModify = useRef(false)
   let initVal = useRef({ // useRef 를 써서 데이터가 변경될 때 마다 실시간 감지를 할 수있음. useState는 재랜더링 시에 감지.
     title:"",
     text:"",
@@ -26,16 +26,21 @@ function Input() {
   },[stateList])
 
   const handleChange = (e) => {
-		const { name, value } = e.target;
-		setVal({ ...Val, [name]: value });
-    setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
-	};
+    const { name, value } = e.target;
+    const newValues = { ...Val, [name]: value };
+    setVal(newValues);
   
-  const handleClickRadioButton =(e)=>{
-    setListCondition(e.target.value);
-    setVal({ ...Val, "condition": e.target.value })
-    setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
-  }
+    IsModify.current = JSON.stringify(newValues) !== JSON.stringify(initVal.current);
+  };
+  
+  const handleClickRadioButton = (e) => {
+    const updatedCondition = e.target.value;
+    setListCondition(updatedCondition);
+    const newValues = { ...Val, condition: updatedCondition };
+    setVal(newValues);
+  
+    IsModify.current = JSON.stringify(newValues) !== JSON.stringify(initVal.current);
+  };
 
   const resetForm = () => {
 		setVal({ ...initVal });
@@ -43,7 +48,7 @@ function Input() {
 
   const handleSubmit = (e) => {
 		e.preventDefault();
-    setIsModify(JSON.stringify(Val)!==JSON.stringify(initVal.current))
+    IsModify.current = JSON.stringify(Val)!==JSON.stringify(initVal.current)
     if(!IsGoBack) {
       if(pageCondition === "insert") {
         console.log('등록요청');
@@ -162,9 +167,9 @@ function Input() {
                     navigate(-1);
                     setIsGoBack(true)
                     }}>이전페이지 가기</button>
-                   {/*<input type='reset' value='초기화' onClick={resetForm} />
-                 <input type='submit' disabled={pageCondition !== 'insert' && IsModify} value={pageCondition === 'insert'? "등록":"수정"} />*/}
-                  <input type='submit' value={pageCondition === 'insert'? "등록":"수정"} />
+                  <input type='reset' value='초기화' onClick={resetForm} />
+                  <input type='submit' disabled={!IsModify.current} value={pageCondition === 'insert'? "등록":"수정"} />
+                  {/* <input type='submit' value={pageCondition === 'insert'? "등록":"수정"} /> */}
                 </th>
               </tr>
             </tbody>
